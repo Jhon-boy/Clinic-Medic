@@ -11,15 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TPERESPECIALIDAD", schema = "dbo", catalog = "mediapp")
-public class TPERESPECIALIDAD {
+@Table(name = "TPERPROFECION", catalog = "mediapp")
+public class TPERPROFECION {
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NOMBRE", nullable = false, length = 100)
+    @Column(name = "NOMBRE", nullable = false, length = 100, unique = true)
     private String nombre;
 
     @Column(name = "DESCRIPCION", nullable = false, length =250)

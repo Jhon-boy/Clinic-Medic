@@ -11,11 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TEMPEMPRESADETALLE",schema = "dbo", catalog = "mediapp")
+@Table(name = "TEMPEMPRESADETALLE", catalog = "mediapp")
 public class TEMPEMPRESADETALLE {
 
-    @EmbeddedId
-    @Column(name = "IDEMPRESA", nullable = false)
+    @Id
+    @Column(name = "ID")
+    private int id;
+
+    @OneToOne
+    @JoinColumn(name = "IDEMPRESA")
     private  TEMPEMPRESA empresa;
 
     private String provincia;

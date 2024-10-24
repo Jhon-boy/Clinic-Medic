@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TPAGFORMAPAGO", schema = "dbo", catalog = "mediapp")
+@Table(name = "TPAGFORMAPAGO",  catalog = "mediapp")
 public class TPAGFORMAPAGO {
 
     @Id
@@ -21,7 +21,7 @@ public class TPAGFORMAPAGO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
 
-    @Column(name = "NOMBRE", length = 30)
+    @Column(name = "NOMBRE", length = 30, unique = true)
     private String nombre;
 
     @Column(name = "DESCRIPCION", length = 250)

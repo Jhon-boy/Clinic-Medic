@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TPERPERSONA", schema = "dbo", catalog = "mediapp")
+@Table(name = "TPERPERSONA",   catalog = "mediapp")
 public class TPERPERSONA {
 
     @Id
@@ -36,11 +36,15 @@ public class TPERPERSONA {
     @Column(name = "FECHAACTUALIZACION", nullable = true)
     private Date fechaActualizacion;
 
-    @Column(name = "EMAIL", nullable = true, length = 30)
+    @Column(name = "EMAIL", nullable = true, length = 30, unique = true)
     private String email;
 
     @Column(name = "TELEFONO", nullable = true, length = 10)
     private String telefono;
+
+    @Column(name = "IDENTIFICACION", nullable = true, length = 10, unique = true)
+    private String IDENTIFICACION;
+
 
 }
 

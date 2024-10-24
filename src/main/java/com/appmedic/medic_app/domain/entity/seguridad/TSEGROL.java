@@ -11,14 +11,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="TSEGROL",  schema = "dbo", catalog = "mediapp")
+@Table(name="TSEGROL", catalog = "mediapp")
 public class TSEGROL {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID", nullable = false)
     private int id;
 
-    @Column(name = "NOMBRE", nullable = false, length = 30)
+    @Column(name = "NOMBRE", nullable = false, length = 30, unique = true)
     private String nombre;
 
     @Column(name = "DESCRIPCION", nullable = false, length = 250)

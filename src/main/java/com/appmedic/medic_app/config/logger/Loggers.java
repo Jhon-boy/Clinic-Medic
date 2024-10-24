@@ -21,7 +21,7 @@ public class Loggers implements  LoggerPort {
 
     @Override
     public void error(String message, Throwable error) {
-        logger.error(message, error);
+        logger.error(message, (Object) error.getStackTrace());
     }
 }
 

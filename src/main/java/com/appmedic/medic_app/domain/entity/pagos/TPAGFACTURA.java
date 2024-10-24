@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TPAGFACTURA", schema = "dbo", catalog = "mediapp")
+@Table(name = "TPAGFACTURA",  catalog = "mediapp")
 public class TPAGFACTURA {
 
     @Id

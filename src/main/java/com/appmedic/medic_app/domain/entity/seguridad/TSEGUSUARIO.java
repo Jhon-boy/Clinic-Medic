@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="TSEGUSUARIO",  schema = "dbo", catalog = "mediapp")
+@Table(name="TSEGUSUARIO", catalog = "mediapp")
 public class TSEGUSUARIO {
 
     @Id
@@ -29,7 +29,7 @@ public class TSEGUSUARIO {
     @JoinColumn(name = "IDPERSONA", nullable = false)
     private TPERPERSONA persona;
 
-    @Column(name = "USUARIO", nullable = false, length = 20)
+    @Column(name = "USUARIO", nullable = false, length = 20, unique = true)
     private String usuario;
 
     @Column(name = "CLAVE", nullable = false, length = 100)
@@ -38,10 +38,12 @@ public class TSEGUSUARIO {
     @Column(name = "ACTIVO")
     private boolean activo;
 
+    @Column(name = "SESSION")
+    private boolean sesion;
+
     @Column(name = "FECHAINGRESO", nullable = false)
     private Date fechaIngreso;
 
     @Column(name = "FECHAACTUALIZACION", nullable = true)
     private Date fechaActualizacion;
-
 }

@@ -14,14 +14,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TEMPEMPRESA",schema = "dbo", catalog = "mediapp")
+@Table(name = "TEMPEMPRESA",  catalog = "mediapp")
 public class TEMPEMPRESA {
 
     @Id
     @Column(name = "RUC", length = 15)
     private String ruc;
 
-    @Column(name = "NOMBRE", length = 50)
+    @Column(name = "NOMBRE", length = 50, unique = true)
     private String nombre;
 
     @Column(name = "DESCRIPCION", length = 255)

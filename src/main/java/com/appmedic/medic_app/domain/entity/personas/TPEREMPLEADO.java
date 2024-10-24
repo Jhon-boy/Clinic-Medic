@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TPEREMPLEADO", schema = "dbo", catalog = "mediapp")
+@Table(name = "TPEREMPLEADO",  catalog = "mediapp")
 public class TPEREMPLEADO {
 
     @Id
@@ -23,9 +23,9 @@ public class TPEREMPLEADO {
     @JoinColumn(name = "IDPERSONA", nullable = false)
     private TPERPERSONA persona;
 
-    @ManyToOne
-    @JoinColumn(name = "IDESPECIALIDAD", nullable = false)
-    private TPERESPECIALIDAD especialidad;
+    @OneToOne
+    @JoinColumn(name = "IDPROFECION", nullable = false)
+    private TPERPROFECION profecion;
 
     @Column(name = "IMAGEN", columnDefinition = "LONGBLOB")
     private byte[] imagen;

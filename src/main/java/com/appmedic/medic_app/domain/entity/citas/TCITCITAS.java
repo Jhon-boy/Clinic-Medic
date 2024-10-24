@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name = "TCITCITAS", schema = "dbo", catalog = "mediapp")
+@Table(name = "TCITCITAS", catalog = "mediapp")
 public class TCITCITAS {
 
     @Id
