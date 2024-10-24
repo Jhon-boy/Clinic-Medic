@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 
 /**
  * Clase que alimenta de funcionalidades a toda la aplicacion
+ * @author Jhon
+ * @version 1.0
  * */
 @Component
 public class Utils {

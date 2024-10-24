@@ -30,4 +30,10 @@ public class TPEREMPLEADO {
     @Column(name = "IMAGEN", columnDefinition = "LONGBLOB")
     private byte[] imagen;
 
+    @Column(name = "SLOGAN", nullable = false, length = 250)
+    private String slogan;
+
+    @Column(name = "EXPERIENCIA", nullable = false, length = 250)
+    private float experiencia;
+
 }

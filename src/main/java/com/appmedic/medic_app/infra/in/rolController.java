@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("api/v1/mediapp/rol")
+@RequestMapping("${spring.mediapp.url_endpoint}/rol")
 public class rolController {
 
     private final rolService service;

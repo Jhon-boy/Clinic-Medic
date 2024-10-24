@@ -1,9 +1,11 @@
 package com.appmedic.medic_app.infra.in;
-import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
 import com.appmedic.medic_app.config.logger.Loggers;
 import com.appmedic.medic_app.domain.entity.seguridad.persistence.tUsuarioRepository;
 import com.appmedic.medic_app.infra.out.Response;
-import org.springframework.stereotype.Controller;
+import com.appmedic.medic_app.util._CONST;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controlador de la entidad TSEGUSUARIO
@@ -11,9 +13,9 @@ import org.springframework.stereotype.Controller;
  * @version 1.0
  * */
 
-@Controller
+@RestController
+@RequestMapping("${spring.mediapp.url_endpoint}/usuario")
 public class usuarioController {
-
 
     private static final Loggers log = new Loggers();
     private final tUsuarioRepository repository;

@@ -4,6 +4,8 @@ import lombok.Getter;
 
 /**
  * Enumerados de manejo de errores
+ * @author Jhon
+ * @version 1.0
  * */
 @Getter
 public enum Errores {

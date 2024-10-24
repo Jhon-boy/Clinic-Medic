@@ -20,7 +20,7 @@ import javax.validation.Valid;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("api/v1/mediapp/persona")
+@RequestMapping("${spring.mediapp.url_endpoint}/persona")
 public class personaController {
 
     private static final Loggers log = new Loggers();

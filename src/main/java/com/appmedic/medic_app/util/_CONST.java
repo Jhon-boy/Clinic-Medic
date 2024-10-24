@@ -1,12 +1,22 @@
 package com.appmedic.medic_app.util;
 
+import com.appmedic.medic_app.config.LoadValues;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * Constantes usadas en toda la aplicacion
+ * @author Jhon
+ * @version  1.0
  * */
 @Component
 public class _CONST {
+
+    private static final LoadValues loadValues = new LoadValues();
+    @Autowired
+    public _CONST(LoadValues loadValues) {
+        URL_ENDPOINT = loadValues.getUrl_endpoint();
+    }
 
     public static final String COD_OK = "1";
     public static final String COD_ERROR = "ERROR";
@@ -21,4 +31,6 @@ public class _CONST {
 
     // ERRORES EN SOLICITUD
     public static final String CLASS_ERROR = "\nCLASE ERROR --> ";
+    public static String URL_ENDPOINT;
+
 }

@@ -25,9 +25,4 @@ public class TPERPROFECION {
     @Column(name = "DESCRIPCION", nullable = false, length =250)
     private String descripcion;
 
-    @Column(name = "SLOGAN", nullable = false, length = 250)
-    private String slogan;
-
-    @Column(name = "EXPERIENCIA", nullable = false, length = 250)
-    private float experiencia;
 }
