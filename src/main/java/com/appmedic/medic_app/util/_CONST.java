@@ -1,7 +1,5 @@
 package com.appmedic.medic_app.util;
 
-import com.appmedic.medic_app.config.LoadValues;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,14 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class _CONST {
 
-    private static final LoadValues loadValues = new LoadValues();
-    @Autowired
-    public _CONST(LoadValues loadValues) {
-        URL_ENDPOINT = loadValues.getUrl_endpoint();
-    }
-
     public static final String COD_OK = "1";
     public static final String COD_ERROR = "ERROR";
+    public static final String TOKEN_EXPIRED = "TKEXP00";
+    public static final String TOKEN_INVALID = "TKNVP00";
     public static final String MENSAJE_OK = "Transacción OK";
     public static final String MENSAJE_ERROR = "ERROR, INTENTE NUEVAMENTE MÁS TARDE";
 

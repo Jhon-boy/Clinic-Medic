@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 
 /**
  * Maneja las excepcciones de la aplicacion
+ * @author Jhon C
+ * @version 1.0
  * */
 @EqualsAndHashCode(callSuper = true)
 @Data

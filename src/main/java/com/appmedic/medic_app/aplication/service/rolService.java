@@ -35,11 +35,11 @@ public class rolService implements rolServicePort {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response<?> response = Utils.generateBadResponseDefault();
         try {
-            TSEGROL rol = rolMappers.toRolEntityMapper(dto);
+            TSEGROL rol = rolMappers.toDTOtoEntity(dto);
             TSEGROL rolCreado = repository.save(rol);
             response = Utils.generateOKResponse(rolCreado);
         }catch (Exception e){
-            logs.error(_CONST.COD_ERROR ,e);
+            logs.error(_CONST.CLASS_ERROR ,e);
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;

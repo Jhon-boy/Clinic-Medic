@@ -1,13 +1,10 @@
 package com.appmedic.medic_app.aplication.ports.in.dto;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import jakarta.validation.constraints.*;
-/**
- * Modelo de atributos a enviar/recibir
- * */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record registrarRolDTO(
+public record registrarProfecionDTO (
 
         @Size(min = 1, message = "Campo NOMBRE debe tener mas caracteres")
         @NotBlank(message = "Campo NOMBRE no puede ser vacio")
@@ -16,8 +13,5 @@ public record registrarRolDTO(
 
         @Size(min = 5, message = "Campo DESCRIPCION debe tener mas caracteres")
         @NotBlank(message = "Campo DESCRIPCION no puede ser vacio")
-        String descripcion,
-
-        boolean activo
-) {
-}
+        String descripcion
+){ }

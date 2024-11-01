@@ -1,23 +1,27 @@
 package com.appmedic.medic_app.aplication.ports.in.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 /**
  * Modelo para recibir datos
  * */
 public record registrarEmpleadoDTO(
 
-        @NotNull(message = "Campo IDPERSONA no puede ser nulo ")
         @Min(1)
         int idPersona,
 
-        @NotNull(message = "Campo IDPROFECION no puede ser nulo ")
         @Min(1)
         int idProfecion,
 
-        byte[] imagen
+        byte[] imagen,
+
+        @Min(1)
+        int experiencia,
+
+        String slogan
 
 ) {
 }

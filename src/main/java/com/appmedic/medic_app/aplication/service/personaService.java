@@ -10,6 +10,9 @@ import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import com.appmedic.medic_app.util._CONST;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * La logica de Negocio para la entidad TPERPERSONA
@@ -34,20 +37,33 @@ public class personaService implements personaServicePort {
      * @return Response<?>>
      * */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Response<?> registrarPersona(registrarPersonaDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response<?> response = Utils.generateBadResponseDefault();
         try {
+            if(existePersona(dto.identificacion())){
+                response.setMessage("ESTE USUARIO YA SE ENCUENTRA REGISTRADO");
+                return response;
+            }
             TPERPERSONA persona = personaMappers.toDTOtoEntity(dto);
             TPERPERSONA personaCreada = repository.save(persona);
             Response<?> responseRegisterUser = usuarioService.registrarUsuario(dto, personaCreada);
-            if(responseRegisterUser.getCode().equals(_CONST.COD_OK) )
+            if(responseRegisterUser.getCode().equals(_CONST.COD_OK) ){
                 response = Utils.generateOKResponse(personaCreada);
-        }catch (Exception e){
+            }
+        } catch (Exception e){
             logs.error(_CONST.COD_ERROR ,e);
-            response = Utils.generateBadResponseDefault();
+            response.setMessage(e.getMessage());
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
+    }
+
+    public boolean existePersona (String identificacion){
+        Optional<TPERPERSONA> tperpersona= repository.findByIdentificacion(identificacion);
+        if(tperpersona.isPresent())
+            return true;
+        return false;
     }
 }

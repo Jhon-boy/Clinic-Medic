@@ -8,14 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.SimpleFormatter;
+import java.util.List; 
 import java.util.stream.Collectors;
 
 /**
@@ -60,7 +58,7 @@ public class Utils {
      * @Return Response
      * */
     public static Response<?> generateBadResponseDefault(){
-        return new Response<>(_CONST.COD_ERROR, _CONST.MENSAJE_ERROR, "{}");
+        return new Response<>(_CONST.COD_ERROR, _CONST.MENSAJE_ERROR, null);
     }
 
     /**
@@ -96,10 +94,16 @@ public class Utils {
     }
 
     /**
-     * Metodo que controla el ingreso de NULOS
+     * Metodo que controla el ingreso de NULOS o caracteres Invalidos
      * */
     public static String safeString(String x) {
-        return (x == null) ? "" : x;
+        if (x == null || x.isEmpty()) {
+            return "";
+        }
+        String normalized = Normalizer.normalize(x, Normalizer.Form.NFD);
+        String clean = normalized.replaceAll("[^\\p{ASCII}]", "");
+        clean = clean.replaceAll("[\\+\\-\\.]", "");
+        return clean.replaceAll("[^\\p{L}\\p{N}\\p{Z}\\p{P}]", "").trim();
     }
 
     /**

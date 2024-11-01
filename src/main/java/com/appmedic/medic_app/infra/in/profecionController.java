@@ -1,47 +1,45 @@
 package com.appmedic.medic_app.infra.in;
 
-import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
-import com.appmedic.medic_app.aplication.service.personaService;
+import com.appmedic.medic_app.aplication.ports.in.dto.registrarProfecionDTO;
+import com.appmedic.medic_app.aplication.service.profecionService;
 import com.appmedic.medic_app.config.logger.Loggers;
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
 
 
 /**
- * Controlador de la entidad TPERPERSONA
+ * Controlador de la entidad TPERPROFECION
  * @author Jhon
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/persona")
-public class personaController {
-
+@RequestMapping("${spring.mediapp.url_endpoint}/profecion")
+public class profecionController {
     private static final Loggers log = new Loggers();
-    private final personaService service;
+    private final profecionService service;
 
-    public  personaController(personaService _service){
-        log.setLogger(personaController.class);
+    public profecionController(profecionService _service){
+        log.setLogger(profecionController.class);
         this.service = _service;
     }
-
     /**
-     * ENDPOINT se encarga de registrar un nuevo persona
+     * ENDPOINT se encarga de registrar un nuevo PROFECION
      * @param dto Objeto de transferencia de datos
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
-    @PostMapping("/registrar")
-    public Response<?> insertarPersona(@RequestBody @Valid registrarPersonaDTO dto, BindingResult bindingResult, HttpServletRequest request){
+    @PostMapping()
+    public Response<?> insertarProfecion( @Valid @RequestBody registrarProfecionDTO dto, BindingResult bindingResult, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         if (bindingResult.hasErrors()) {
             return Utils.getAllErros(bindingResult, rolController.class);
         }
-        return service.registrarPersona(dto);
+        return service.registrarProfecion(dto);
     }
 }

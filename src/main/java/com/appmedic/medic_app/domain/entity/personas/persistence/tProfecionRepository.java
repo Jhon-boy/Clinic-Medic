@@ -4,7 +4,7 @@ import com.appmedic.medic_app.domain.entity.personas.TPERPROFECION;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Interfaz que persistente a la entidad TPERESPECIALIDAD
+ * Interfaz que persiste a la entidad TPERPROFECIONAL
  * */
-public interface tEspecialidadRepository extends JpaRepository<TPERPROFECION, Integer> {
+public interface tProfecionRepository extends JpaRepository<TPERPROFECION, Integer> {
 }

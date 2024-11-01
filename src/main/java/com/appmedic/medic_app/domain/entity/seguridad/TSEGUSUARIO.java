@@ -19,6 +19,7 @@ public class TSEGUSUARIO {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

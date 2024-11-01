@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Clase que se encarga de mapear los atributos de las clases sin realizar ninguna  modificacion
- * por parte de Hibernate
+ * por parte de ORM
  * @author  John C
  * @version 1.0
  */

@@ -17,7 +17,7 @@ public class personaMappers {
         entity.setNombre(Utils.safeString(dto.nombre()));
         entity.setApellido(Utils.safeString(dto.apellido()));
         entity.setEmail(Utils.safeString(dto.email()));
-        entity.setIDENTIFICACION(Utils.safeString(dto.identificacion()));
+        entity.setIdentificacion(Utils.safeString(dto.identificacion()));
         entity.setTelefono(Utils.safeString(dto.telefono()));
         entity.setFechaIngreso(Utils.getDateNow());
         entity.setFnacimiento(dto.fnacimiento());

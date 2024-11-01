@@ -1,6 +1,7 @@
 package com.appmedic.medic_app.aplication.service.mappers;
 
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
+import com.appmedic.medic_app.aplication.ports.out.dto.loginResponseDTO;
 import com.appmedic.medic_app.domain.entity.personas.TPERPERSONA;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGROL;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGUSUARIO;
@@ -24,5 +25,14 @@ public class usuarioMappers {
 
         return usuario;
 
+    }
+    public  static loginResponseDTO toEntityToLogiinDto(TSEGUSUARIO tsegusuario) {
+        loginResponseDTO dto = new loginResponseDTO();
+        dto.setIdUsuario(tsegusuario.getId());
+        dto.setEmail(tsegusuario.getPersona().getEmail());
+        dto.setIdRol(tsegusuario.getRol().getId());
+        dto.setNombres(tsegusuario.getPersona().getNombre());
+        dto.setUsuario(tsegusuario.getUsuario());
+        return dto;
     }
 }

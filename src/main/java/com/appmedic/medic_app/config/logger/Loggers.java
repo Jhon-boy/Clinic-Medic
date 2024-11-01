@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Clase que maneja los Logs de la aplicacion
+ * @author Jhon
+ * @version 1.0
  * */
 public class Loggers implements  LoggerPort {
 
@@ -21,7 +23,7 @@ public class Loggers implements  LoggerPort {
 
     @Override
     public void error(String message, Throwable error) {
-        logger.error(message, (Object) error.getStackTrace());
+        logger.error(message, (Object) error.getMessage());
     }
 }
 

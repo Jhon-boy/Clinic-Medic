@@ -13,6 +13,7 @@ import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import com.appmedic.medic_app.util._CONST;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -35,21 +36,23 @@ public class usuarioService implements usuarioServicePort {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Response<?> registrarUsuario(registrarPersonaDTO dto, TPERPERSONA persona) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response<?> response =  Utils.generateBadResponseDefault();
         try{
             Optional<TSEGROL> rolOptional = rolRepository.findById(dto.idRol());
             if(rolOptional.isPresent()){
-                TSEGROL rol = rolOptional.get();
-                TSEGUSUARIO usuario = usuarioMappers.toDTOtoEntity(dto, rol, persona);
+                TSEGUSUARIO usuario = usuarioMappers.toDTOtoEntity(dto, rolOptional.get(), persona);
                 repository.save(usuario);
                 response =Utils.generateOKResponse(usuario);
             }
         }catch (Exception e){
             logs.error(_CONST.COD_ERROR ,e);
+            response.setMessage(e.getMessage());
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
     }
+
 }

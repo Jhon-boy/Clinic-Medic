@@ -43,7 +43,7 @@ public class TPERPERSONA {
     private String telefono;
 
     @Column(name = "IDENTIFICACION", nullable = true, length = 10, unique = true)
-    private String IDENTIFICACION;
+    private String identificacion;
 
 
 }

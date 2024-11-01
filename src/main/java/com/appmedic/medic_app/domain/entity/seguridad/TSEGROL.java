@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name="TSEGROL", catalog = "mediapp")
 public class TSEGROL {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     @Column(name = "ID", nullable = false)
     private int id;
