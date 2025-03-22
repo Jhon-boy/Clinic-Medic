@@ -35,7 +35,7 @@ public class empleadoController {
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
     @PostMapping
-    public Response<?> insertarEmpleado(@Valid @RequestBody registrarEmpleadoDTO dto, BindingResult bindingResul, HttpServletRequest request){
+    public Response insertarEmpleado(@Valid @RequestBody registrarEmpleadoDTO dto, BindingResult bindingResul, HttpServletRequest request){
         log.info(_CONST.DIR_IP+ Utils.getClientIP(request) );
         if(bindingResul.hasErrors()){
             return Utils.getAllErros(bindingResul, empleadoController.class);

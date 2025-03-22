@@ -3,7 +3,6 @@ package com.appmedic.medic_app.aplication.security;
 import com.appmedic.medic_app.aplication.security.auth.jwtAuthEntryPoint;
 import com.appmedic.medic_app.aplication.security.auth.jwtAuthenticationFilter;
 import com.appmedic.medic_app.aplication.service.loginService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

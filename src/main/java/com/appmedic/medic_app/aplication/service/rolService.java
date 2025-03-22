@@ -31,9 +31,9 @@ public class rolService implements rolServicePort {
     }
 
     @Override
-    public Response<?> registrarRol(registrarRolDTO dto) {
+    public Response registrarRol(registrarRolDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
-        Response<?> response = Utils.generateBadResponseDefault();
+        Response response = Utils.generateBadResponseDefault();
         try {
             TSEGROL rol = rolMappers.toDTOtoEntity(dto);
             TSEGROL rolCreado = repository.save(rol);
@@ -47,9 +47,9 @@ public class rolService implements rolServicePort {
 
 
     @Override
-    public Response<?> findById(int id) {
+    public Response findById(int id) {
         logs.info(_CONST.ML_INI + Utils.toJson(id));
-        Response<?> response = Utils.generateBadResponseDefault();
+        Response response = Utils.generateBadResponseDefault();
         try {
             Optional<TSEGROL> rol = repository.findById(id);
             if(rol.isPresent())

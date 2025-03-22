@@ -10,7 +10,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -49,7 +48,7 @@ public class jwtAuthEntryPoint  implements AuthenticationEntryPoint {
     public void commence( HttpServletRequest request,  HttpServletResponse response,
             AuthenticationException authException) throws IOException {
 
-        Response<?> responseApp = new Response<>();
+        Response responseApp = new Response();
         TokenVerify tokenVerify;
 
         if (authException instanceof InsufficientAuthenticationException) {
@@ -85,6 +84,7 @@ public class jwtAuthEntryPoint  implements AuthenticationEntryPoint {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
+        log.info(_CONST.ML_FIN + Utils.toJson(responseApp));
         mapper.writeValue(response.getOutputStream(), responseApp);
     }
 }

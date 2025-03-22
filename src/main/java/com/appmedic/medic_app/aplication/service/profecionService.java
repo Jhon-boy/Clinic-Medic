@@ -26,9 +26,9 @@ public class profecionService implements profecionServicePort {
     }
 
     @Override
-    public Response<?> registrarProfecion(registrarProfecionDTO dto) {
+    public Response registrarProfecion(registrarProfecionDTO dto) {
       logs.info(_CONST.ML_INI + Utils.toJson(dto));
-      Response<?> response = Utils.generateBadResponseDefault();
+      Response response = Utils.generateBadResponseDefault();
       try {
           TPERPROFECION profecion = profecionMappers.toDTOtoEntity(dto);
           var result = repository.save(profecion);

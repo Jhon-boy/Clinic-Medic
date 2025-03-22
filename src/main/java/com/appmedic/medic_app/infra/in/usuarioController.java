@@ -34,7 +34,7 @@ public class usuarioController {
     }
 
     @PostMapping("/login")
-    public Response<?> login(@Valid @RequestBody loginDTO dto , BindingResult bindingResult, HttpServletRequest request){
+    public Response login(@Valid @RequestBody loginDTO dto , BindingResult bindingResult, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         if (bindingResult.hasErrors()) {
             return Utils.getAllErros(bindingResult, rolController.class);

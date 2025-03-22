@@ -17,7 +17,7 @@ import lombok.Setter;
  * @version 1.0
  * */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Response<T> {
+public class Response {
 
     @JsonProperty("code")
     private String code;
@@ -26,5 +26,5 @@ public class Response<T> {
     private String message;
 
     @JsonProperty("data")
-    private T data;
+    private Object data;
 }

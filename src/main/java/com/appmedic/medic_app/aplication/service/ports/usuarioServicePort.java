@@ -7,5 +7,5 @@ import com.appmedic.medic_app.infra.out.Response;
 
 public interface usuarioServicePort {
 
-    Response<?> registrarUsuario(registrarPersonaDTO dto,  TPERPERSONA persona);
+    Response registrarUsuario(registrarPersonaDTO dto,  TPERPERSONA persona);
 }

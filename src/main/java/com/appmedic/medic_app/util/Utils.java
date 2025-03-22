@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List; 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -38,8 +38,8 @@ public class Utils {
      *
      * @Return Response
      * */
-    public static Response<?> generateResponse(String cod, String message, Object obj){
-        return new Response<>(cod, message, obj);
+    public static Response generateResponse(String cod, String message, Object obj){
+        return new Response(cod, message, obj);
     }
 
     /**
@@ -47,8 +47,8 @@ public class Utils {
      * @Param obj: Cualquier dato adicional
      * @Return Response
      * */
-    public static Response<?> generateOKResponse(Object obj){
-        return new Response<>(_CONST.COD_OK, _CONST.MENSAJE_OK, obj);
+    public static Response generateOKResponse(Object obj){
+        return new Response(_CONST.COD_OK, _CONST.MENSAJE_OK, obj);
     }
 
 
@@ -57,8 +57,8 @@ public class Utils {
      * @Param obj: Cualquier dato adicional
      * @Return Response
      * */
-    public static Response<?> generateBadResponseDefault(){
-        return new Response<>(_CONST.COD_ERROR, _CONST.MENSAJE_ERROR, null);
+    public static Response generateBadResponseDefault(){
+        return new Response(_CONST.COD_ERROR, _CONST.MENSAJE_ERROR, null);
     }
 
     /**
@@ -87,7 +87,7 @@ public class Utils {
      * Metodo que genera la lista de Errores de una solicitud HTTP en los
      * controladores
      * */
-    public static <T> Response<?> getAllErros(BindingResult bindingResult, Class<T> clazz){
+    public static <T> Response getAllErros(BindingResult bindingResult, Class<T> clazz){
         List<String> errors = bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
         log.info(_CONST.CLASS_ERROR + clazz.getSimpleName() +  _CONST.ML_ERROR + toJson(errors));
         return Utils.generateResponse(_CONST.COD_ERROR, "Verifique que los campos esten completos", errors);

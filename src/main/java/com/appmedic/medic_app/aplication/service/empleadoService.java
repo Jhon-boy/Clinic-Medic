@@ -36,9 +36,9 @@ public class empleadoService  implements empeladoServicePort {
     }
 
     @Override
-    public Response<?> registrarEmpleado(registrarEmpleadoDTO dto) {
+    public Response registrarEmpleado(registrarEmpleadoDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
-        Response<?> response = Utils.generateBadResponseDefault();
+        Response response = Utils.generateBadResponseDefault();
         try {
             Optional<TPERPERSONA> persona = personaRepository.findById(dto.idPersona());
             Optional<TPERPROFECION> profecion = profecionalRepository.findById(dto.idProfecion());

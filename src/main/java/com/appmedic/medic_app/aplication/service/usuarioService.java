@@ -37,9 +37,9 @@ public class usuarioService implements usuarioServicePort {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Response<?> registrarUsuario(registrarPersonaDTO dto, TPERPERSONA persona) {
+    public Response registrarUsuario(registrarPersonaDTO dto, TPERPERSONA persona) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
-        Response<?> response =  Utils.generateBadResponseDefault();
+        Response response =  Utils.generateBadResponseDefault();
         try{
             Optional<TSEGROL> rolOptional = rolRepository.findById(dto.idRol());
             if(rolOptional.isPresent()){

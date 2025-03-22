@@ -37,7 +37,7 @@ public class personaController {
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
     @PostMapping("/registrar")
-    public Response<?> insertarPersona(@RequestBody @Valid registrarPersonaDTO dto, BindingResult bindingResult, HttpServletRequest request){
+    public Response insertarPersona(@RequestBody @Valid registrarPersonaDTO dto, BindingResult bindingResult, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         if (bindingResult.hasErrors()) {
             return Utils.getAllErros(bindingResult, rolController.class);

@@ -25,7 +25,7 @@ public class isAliveController {
     }
 
     @GetMapping()
-    public Response<?> isAlive(HttpServletRequest request){
+    public Response isAlive(HttpServletRequest request){
         logger.info(_CONST.DIR_IP+ Utils.getClientIP(request) );
         return Utils.generateOKResponse(null);
     }

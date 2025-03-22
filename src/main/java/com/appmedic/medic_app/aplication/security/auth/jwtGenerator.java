@@ -73,23 +73,19 @@ public class jwtGenerator {
         try {
             Jwts.parser().verifyWith((SecretKey) getKey()).build().parseSignedClaims(token).getPayload();
             return true;
-        } catch (MalformedJwtException e) {
+        } catch (MalformedJwtException | UnsupportedJwtException e) {
             logs.error("Token mal formado " , e);
-            //return TokenVerify.BAD_FORMED.getId();
-        } catch (UnsupportedJwtException e) {
-            logs.error("Token mal formado " , e);
-           // return TokenVerify.BAD_FORMED.getId();
+            throw e;
         } catch (ExpiredJwtException e) {
             logs.error("Token expirado " , e);
-           //return TokenVerify.EXPIRADO.getId();
+            throw e;
         } catch (IllegalArgumentException e) {
             logs.error("Token vacio " , e);
-           // return TokenVerify.BAD_FORMED.getId();
+            throw e;
         } catch (SignatureException e) {
             logs.error("Token vacio  " , e);
-           // return TokenVerify.DEFAULT.getId();
+            throw e;
         }
-        return false;
     }
 
     public String refreshToken(Authentication authentication) {

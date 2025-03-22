@@ -35,7 +35,7 @@ public class profecionController {
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
     @PostMapping()
-    public Response<?> insertarProfecion( @Valid @RequestBody registrarProfecionDTO dto, BindingResult bindingResult, HttpServletRequest request){
+    public Response insertarProfecion( @Valid @RequestBody registrarProfecionDTO dto, BindingResult bindingResult, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         if (bindingResult.hasErrors()) {
             return Utils.getAllErros(bindingResult, rolController.class);

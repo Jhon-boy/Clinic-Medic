@@ -5,9 +5,7 @@ import com.appmedic.medic_app.aplication.ports.out.dto.loginResponseDTO;
 import com.appmedic.medic_app.aplication.security.auth.jwtGenerator;
 import com.appmedic.medic_app.aplication.service.mappers.usuarioMappers;
 import com.appmedic.medic_app.config.logger.Loggers;
-import com.appmedic.medic_app.domain.entity.personas.persistence.tPersonaRepository;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGUSUARIO;
-import com.appmedic.medic_app.domain.entity.seguridad.persistence.tRolRepository;
 import com.appmedic.medic_app.domain.entity.seguridad.persistence.tUsuarioRepository;
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
@@ -66,9 +64,9 @@ public class loginService implements UserDetailsService {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public Response<?> logeoUsuario(loginDTO dto){
+    public Response logeoUsuario(loginDTO dto){
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
-        Response<?> response =  Utils.generateBadResponseDefault();
+        Response response =  Utils.generateBadResponseDefault();
         try{
             Optional<TSEGUSUARIO> usuario = usuarioRepository.findByUsuario(dto.user());
             if(usuario.isPresent()){

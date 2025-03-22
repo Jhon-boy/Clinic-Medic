@@ -38,9 +38,9 @@ public class personaService implements personaServicePort {
      * */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Response<?> registrarPersona(registrarPersonaDTO dto) {
+    public Response registrarPersona(registrarPersonaDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
-        Response<?> response = Utils.generateBadResponseDefault();
+        Response response = Utils.generateBadResponseDefault();
         try {
             if(existePersona(dto.identificacion())){
                 response.setMessage("ESTE USUARIO YA SE ENCUENTRA REGISTRADO");
@@ -48,13 +48,14 @@ public class personaService implements personaServicePort {
             }
             TPERPERSONA persona = personaMappers.toDTOtoEntity(dto);
             TPERPERSONA personaCreada = repository.save(persona);
-            Response<?> responseRegisterUser = usuarioService.registrarUsuario(dto, personaCreada);
+            Response responseRegisterUser = usuarioService.registrarUsuario(dto, personaCreada);
             if(responseRegisterUser.getCode().equals(_CONST.COD_OK) ){
                 response = Utils.generateOKResponse(personaCreada);
             }
         } catch (Exception e){
             logs.error(_CONST.COD_ERROR ,e);
-            response.setMessage(e.getMessage());
+            response.setMessage(_CONST.MENSAJE_ERROR);
+            response.setData(Utils.toJson(e.getMessage()));
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
