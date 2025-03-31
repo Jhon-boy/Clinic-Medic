@@ -42,7 +42,7 @@ public class personaService implements personaServicePort {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response response = Utils.generateBadResponseDefault();
         try {
-            if(existePersona(dto.identificacion())){
+            if(existePersona(dto.identificacion()) || usuarioService.obtenerUsuarioByUser(dto.usuario()).getCode().equals(_CONST.COD_OK)){
                 response.setMessage("ESTE USUARIO YA SE ENCUENTRA REGISTRADO");
                 return response;
             }
@@ -59,6 +59,10 @@ public class personaService implements personaServicePort {
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
+    }
+
+    public  Response getUsers(String estado){
+        return  usuarioService.getAllUsers(estado);
     }
 
     public boolean existePersona (String identificacion){

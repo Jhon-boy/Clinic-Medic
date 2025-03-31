@@ -7,11 +7,9 @@ import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -43,5 +41,12 @@ public class personaController {
             return Utils.getAllErros(bindingResult, rolController.class);
         }
         return service.registrarPersona(dto);
+    }
+    @PostMapping("/listar/{estado}")
+    @Cacheable(value = "track", key = "#estado")
+    public  Response getUsers(@PathVariable String estado, HttpServletRequest request) throws Exception {
+        log.info(Utils.getClientIP(request));
+        Thread.sleep(5 * 1000);
+        return  service.getUsers(estado);
     }
 }

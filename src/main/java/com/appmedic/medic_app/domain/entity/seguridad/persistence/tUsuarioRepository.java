@@ -1,8 +1,10 @@
 package com.appmedic.medic_app.domain.entity.seguridad.persistence;
 
+import com.appmedic.medic_app.aplication.ports.out.dto.UsuarioDTO;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGUSUARIO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -10,4 +12,5 @@ import java.util.Optional;
  * */
 public interface tUsuarioRepository extends JpaRepository<TSEGUSUARIO, Integer> {
     Optional<TSEGUSUARIO> findByUsuario(String usuario);
+    List<TSEGUSUARIO> findAll();
 }

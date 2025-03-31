@@ -5,4 +5,5 @@ import com.appmedic.medic_app.infra.out.Response;
 
 public interface empeladoServicePort {
     Response registrarEmpleado(registrarEmpleadoDTO dto);
+    Response ListaEmpleados();
 }

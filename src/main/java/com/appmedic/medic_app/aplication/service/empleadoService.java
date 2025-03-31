@@ -51,4 +51,12 @@ public class empleadoService  implements empeladoServicePort {
         }
         return  response;
     }
+
+    /**Metodo que devuelve listado de empleados
+     * @return
+     */
+    @Override
+    public Response ListaEmpleados() {
+        return null;
+    }
 }
