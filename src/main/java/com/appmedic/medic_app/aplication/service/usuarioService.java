@@ -73,32 +73,29 @@ public class usuarioService implements usuarioServicePort {
         return  Utils.generateBadResponseDefault();
     }
 
-    /**
+    /** Method obtain all Users filter by state
      * @param estado
      * @return
      */
     @Override
     public Response getAllUsers(String estado) {
         logs.info(_CONST.ML_INI + estado);
-        Response response =  Utils.generateBadResponseDefault();
-        List<TSEGUSUARIO> users = repository.findAll().stream().filter(user -> user.isActivo()).collect(Collectors.toList());
-        List<UsuarioDTO> listUsers =  users.stream().map(
-                user -> UsuarioDTO.builder()
-                        .id(user.getId())
-                        .nombre(user.getPersona().getNombre())
-                        .apellido(user.getPersona().getApellido())
-                        .identificacion(user.getPersona().getIdentificacion())
-                        .idRol(user.getRol().getId())
-                        .nombreRol(user.getRol().getNombre())
-                        .email(user.getPersona().getEmail())
-                        .fechaIngreso(user.getPersona().getFnacimiento())
-                        .fechaIngreso(user.getPersona().getFechaIngreso())
-                        .fechaActualizacion(user.getFechaActualizacion())
-                        .telefono(user.getPersona().getTelefono())
-                        .build()
-        ).collect(Collectors.toList());
-
-        return Utils.generateOKResponse(listUsers);
+        int StateFilter = Estados.getByName(estado).getId();
+        List<TSEGUSUARIO> users = repository.findAll();
+        switch (StateFilter){
+            case 1: //Active
+                users =users.stream().filter(user -> user.isActivo()).collect(Collectors.toList());
+                break;
+            case 0: //In Active
+                users =users.stream().filter(user -> !user.isActivo()).collect(Collectors.toList());
+                break;
+            case 2: //All users
+                break;
+                default:
+                     return  Utils.generateBadResponseDefault();
+        }
+        logs.info(_CONST.ML_FIN + estado);
+        return Utils.generateOKResponse(usuarioMappers.toListUsuarioDto(users));
     }
 
 }

@@ -42,6 +42,9 @@ public class personaController {
         }
         return service.registrarPersona(dto);
     }
+    /**
+     * ENDPOINT que lista las personas acorde a su estado
+     * */
     @PostMapping("/listar/{estado}")
     @Cacheable(value = "track", key = "#estado")
     public  Response getUsers(@PathVariable String estado, HttpServletRequest request) throws Exception {
