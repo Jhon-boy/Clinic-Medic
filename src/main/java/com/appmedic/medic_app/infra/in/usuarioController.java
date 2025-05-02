@@ -1,4 +1,5 @@
 package com.appmedic.medic_app.infra.in;
+import com.appmedic.medic_app.aplication.ports.in.dto.logOutDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.loginDTO;
 import com.appmedic.medic_app.aplication.service.loginService;
 import com.appmedic.medic_app.config.logger.Loggers;
@@ -6,6 +7,7 @@ import com.appmedic.medic_app.domain.entity.seguridad.persistence.tUsuarioReposi
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,4 +43,14 @@ public class usuarioController {
         }
         return service.logeoUsuario(dto);
     }
+
+    @PostMapping("/loginout")
+    public Response loginOut(@Valid @RequestBody logOutDTO dto, BindingResult bindingResult, HttpServletRequest request){
+        log.info(Utils.getClientIP(request));
+        if (bindingResult.hasErrors()) {
+            return Utils.getAllErros(bindingResult, rolController.class);
+        }
+        return service.logOut(dto);
+    }
+
 }

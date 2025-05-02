@@ -8,7 +8,8 @@ public enum TokenVerify {
     EXPIRADO(2, "TN002","TOKEN EXPIRADO"),
     BAD_FORMED(3, "TN003","TOKEN INVALIDO"),
     NO_ASOCIADO(4, "TN004", "ROLES NO ASOCIADO AL USUARIO"),
-    DEFAULT(5, "TN005","ERROR AL VALIDAR EL TOKEN");
+    DEFAULT(5, "TN005","ERROR AL VALIDAR EL TOKEN"),
+    LOG_OUT(6, "TN006", "TOKEN INVALIDADO");
 
     private final int id;
     private final String code;

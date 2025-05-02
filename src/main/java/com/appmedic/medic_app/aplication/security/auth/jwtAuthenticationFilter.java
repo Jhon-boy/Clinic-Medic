@@ -53,6 +53,10 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
             String token = getJwtFromRequest(request);
             if (StringUtils.hasText(token)) {
                 // Validar el token - esto lanzará excepciones si el token no es válido
+                if(loginService.isBlackList(token)){
+                    handleTokenError(response, TokenVerify.LOG_OUT.getCode(),TokenVerify.LOG_OUT.getMessage());
+                    return;
+                }
                 if (jwtGenerator.validateToken(token)) {
                     String username = jwtGenerator.getUsernameFromJWT(token);
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);

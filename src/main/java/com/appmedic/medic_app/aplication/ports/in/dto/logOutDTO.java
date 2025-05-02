@@ -4,11 +4,11 @@ import jakarta.validation.constraints.NotBlank;
 /*
  * Modelo para recibir datos
  * */
-public record loginDTO(
+public record logOutDTO(
         @NotBlank(message = "Campo USER no puede ser vacio / nulo")
         String user,
         @NotBlank(message = "Campo PASSWORD no puede ser vacio / nulo")
-        String password,
+        String token,
         String terminalDevice,
         String redName,
         String canal
