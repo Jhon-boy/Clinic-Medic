@@ -1,5 +1,6 @@
 package com.appmedic.medic_app.aplication.service.mappers;
 
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarPersonaDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
 import com.appmedic.medic_app.domain.entity.personas.TPERPERSONA;
 import com.appmedic.medic_app.util.Utils;
@@ -23,5 +24,16 @@ public class personaMappers {
         entity.setFnacimiento(dto.fnacimiento());
 
         return entity;
+    }
+
+    public static TPERPERSONA toDtoEntityUpdate(actualizarPersonaDTO dto){
+        TPERPERSONA entity = new TPERPERSONA();
+        entity.setNombre(dto.nombre());
+        entity.setTelefono(dto.telefono());
+        entity.setEmail(dto.email());
+        entity.setApellido(dto.apellido());
+        entity.setFnacimiento(dto.fnacimiento());
+        entity.setFechaActualizacion(Utils.getDateNow());
+        return  entity;
     }
 }
