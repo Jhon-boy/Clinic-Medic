@@ -32,7 +32,7 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final jwtGenerator jwtGenerator;
     private final loginService userDetailsService;
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     private jwtAuthenticationFilter(jwtGenerator _jwtGenerator, loginService _userDetailsService, ObjectMapper objectMapper){
         this.jwtGenerator = _jwtGenerator;
@@ -83,15 +83,15 @@ public class jwtAuthenticationFilter extends OncePerRequestFilter {
     private void handleTokenError(HttpServletResponse response, String code, String message) throws IOException {
         Response errorResponse = Utils.generateResponse(code, message, null);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+        response.setContentType(securityContants.TYPE_APLICATION);
+        response.setCharacterEncoding(securityContants.TYPE_ENCODING);
         objectMapper.writeValue(response.getOutputStream(), errorResponse);
     }
     /**
      * Metodo que extrae el token desde el Headers
      * */
     private String getJwtFromRequest(HttpServletRequest request){
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader(securityContants.HEADER_NAME);
         if(StringUtils.hasText(token) && token.startsWith("Bearer ")){
             return token.substring(7);
         }

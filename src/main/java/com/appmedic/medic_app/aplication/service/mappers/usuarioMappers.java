@@ -1,5 +1,6 @@
 package com.appmedic.medic_app.aplication.service.mappers;
 
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarPersonaDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
 import com.appmedic.medic_app.aplication.ports.out.dto.UsuarioDTO;
 import com.appmedic.medic_app.aplication.ports.out.dto.loginResponseDTO;
@@ -56,5 +57,16 @@ public class usuarioMappers {
                         .telefono(user.getPersona().getTelefono())
                         .build()
         ).collect(Collectors.toList());
+    }
+    public static TSEGUSUARIO toDTOtoEntityUpdate(actualizarPersonaDTO dto, TSEGROL rol, TPERPERSONA personas){
+        TSEGUSUARIO usuario = new TSEGUSUARIO();
+        usuario.setRol(rol);
+        usuario.setPersona(personas);
+        usuario.setUsuario(Utils.safeString(dto.usuario()));
+        usuario.setClave(Utils.safeString(dto.password()));
+        usuario.setActivo(dto.activo() == 1);
+        usuario.setFechaActualizacion(Utils.getDateNow());
+        return usuario;
+
     }
 }

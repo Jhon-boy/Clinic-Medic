@@ -1,7 +1,9 @@
 package com.appmedic.medic_app.infra.in;
 
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarPersonaDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
 import com.appmedic.medic_app.aplication.service.personaService;
+import com.appmedic.medic_app.config.cache.CacheConfigDB;
 import com.appmedic.medic_app.config.logger.Loggers;
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/persona")
+@RequestMapping("${spring.mediapp.config.url}/persona")
 public class personaController {
 
     private static final Loggers log = new Loggers();
@@ -38,15 +40,30 @@ public class personaController {
     public Response insertarPersona(@RequestBody @Valid registrarPersonaDTO dto, BindingResult bindingResult, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         if (bindingResult.hasErrors()) {
-            return Utils.getAllErros(bindingResult, rolController.class);
+            return Utils.getAllErros(bindingResult, personaController.class);
         }
         return service.registrarPersona(dto);
     }
+
+    /**
+     * ENDPOINT se encarga de actualizat la informacion de persona
+     * @param dto Objeto de transferencia de datos
+     * @return Un objeto de respuesta que indica el resultado del proceso de registro.
+     */
+    @PostMapping("/actualizar")
+    public Response update(@RequestBody @Valid actualizarPersonaDTO dto, BindingResult bindingResult, HttpServletRequest request){
+        log.info(Utils.getClientIP(request));
+        if(bindingResult.hasErrors()){
+            return  Utils.getAllErros(bindingResult,personaController.class);
+        }
+         return  service.updateInformation(dto);
+    }
     /**
      * ENDPOINT que lista las personas acorde a su estado
+     * @apiNote CACHE TEST
      * */
     @PostMapping("/listar/{estado}")
-    @Cacheable(value = "track", key = "#estado")
+    @Cacheable(value = CacheConfigDB.CACHE_NAME, key = "#estado")
     public  Response getUsers(@PathVariable String estado, HttpServletRequest request) throws Exception {
         log.info(Utils.getClientIP(request));
         Thread.sleep(5 * 1000);

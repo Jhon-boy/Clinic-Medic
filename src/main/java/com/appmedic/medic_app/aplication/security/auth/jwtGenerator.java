@@ -1,12 +1,11 @@
 package com.appmedic.medic_app.aplication.security.auth;
 
+import com.appmedic.medic_app.config.AplicationProperties;
 import com.appmedic.medic_app.config.logger.Loggers;
-import com.appmedic.medic_app.util.TokenVerify;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,13 +26,15 @@ import java.util.stream.Collectors;
 @Component
 public class jwtGenerator {
     private final Loggers logs = new Loggers();
-
-    public  jwtGenerator(){
+    //@Value("${security.jwt.secret-key}")
+    private final String secretKey;
+    private final Long expiration;
+    public  jwtGenerator(AplicationProperties aplicationProperties){
         logs.setLogger(jwtGenerator.class);
+        this.secretKey = aplicationProperties.getSecurity().getKey();
+        this.expiration = aplicationProperties.getSecurity().getExpiration();
     }
 
-    @Value("${security.jwt.secret-key}")
-    private String secretKey;
 
     public String generateToken(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
@@ -41,7 +42,7 @@ public class jwtGenerator {
                 .map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
         Date currentDate = new Date(System.currentTimeMillis());
-        Date expireDate = new Date(System.currentTimeMillis()+ securityContants.JWT_EXPIRATION);
+        Date expireDate = new Date(System.currentTimeMillis()+ expiration);
 
         return Jwts.builder()
                 .subject(userPrincipal.getUsername())

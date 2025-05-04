@@ -1,4 +1,5 @@
 package com.appmedic.medic_app.aplication.service;
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarRolDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarRolDTO;
 import com.appmedic.medic_app.aplication.service.mappers.rolMappers;
 import com.appmedic.medic_app.aplication.service.ports.rolServicePort;
@@ -10,7 +11,9 @@ import com.appmedic.medic_app.util.Utils;
 import com.appmedic.medic_app.util._CONST;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * La logica de Negocio para la entidad TSEGROL
@@ -30,6 +33,11 @@ public class rolService implements rolServicePort {
         this.repository = _repository;
     }
 
+    /** Crea registros de la entidad ROL
+     * @param dto
+     * @return
+     */
+
     @Override
     public Response registrarRol(registrarRolDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
@@ -45,7 +53,10 @@ public class rolService implements rolServicePort {
         return response;
     }
 
-
+    /** Busca la informacion  de un ROL por medio del ID
+     * @param dto
+     * @return
+     */
     @Override
     public Response findById(int id) {
         logs.info(_CONST.ML_INI + Utils.toJson(id));
@@ -59,6 +70,31 @@ public class rolService implements rolServicePort {
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
+    }
+
+    /** Actualiza la informacion  de un ROL
+     * @param dto
+     * @return
+     */
+    @Override
+    public Response updateRol(actualizarRolDTO dto) {
+        logs.info(_CONST.ML_INI + Utils.toJson(dto));
+        Response response = Utils.generateBadResponseDefault();
+        if(findById(dto.idRol()).getCode().equals(_CONST.COD_OK)){
+            TSEGROL rolUpdated = repository.save(rolMappers.toDTOtoEntityUpdate(dto));
+            response = Utils.generateOKResponse(rolUpdated);
+        }
+        return response;
+    }
+
+    /** Lista los roles Activos
+     * @return
+     */
+    @Override
+    public Response listRols() {
+        logs.info(_CONST.ML_INI +  "LISTANDO ROLES");
+        List<TSEGROL> roles = repository.findAll();
+        return Utils.generateOKResponse(roles.stream().filter(p -> p.isActivo()).collect(Collectors.toList()));
     }
 
 }

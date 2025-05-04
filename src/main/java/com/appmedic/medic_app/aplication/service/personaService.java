@@ -1,5 +1,6 @@
 package com.appmedic.medic_app.aplication.service;
 
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarPersonaDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarPersonaDTO;
 import com.appmedic.medic_app.aplication.service.mappers.personaMappers;
 import com.appmedic.medic_app.aplication.service.ports.personaServicePort;
@@ -59,6 +60,32 @@ public class personaService implements personaServicePort {
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
         return response;
+    }
+    /**
+     * Actualiza una persona en la entidad TPERPERSONA
+     * @param  dto: Objeto DTO de registro
+     * @return Response<?>>
+     * */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Response updateInformation(actualizarPersonaDTO dto){
+        logs.info(_CONST.ML_INI + Utils.toJson(dto));
+        Response response = Utils.generateBadResponseDefault();
+        try {
+            if(existePersona(dto.identificacion()) || usuarioService.obtenerUsuarioByUser(dto.usuario()).getCode().equals(_CONST.COD_OK)){
+                TPERPERSONA personaUpdate = repository.save(personaMappers.toDtoEntityUpdate(dto));
+                Response user = usuarioService.updateUser(dto, personaUpdate);
+                if(user.getCode().equals(_CONST.COD_OK) ){
+                    response = Utils.generateOKResponse(personaUpdate);
+                }
+            } else {
+                response.setMessage("ESTE USUARIO NO SE ENCUENTRA REGISTRADO");
+            }
+        }catch (Exception e){
+            logs.error(_CONST.COD_ERROR ,e);
+            response.setData(Utils.toJson(e.getMessage()));
+        }
+        return  response;
     }
 
     public  Response getUsers(String estado){

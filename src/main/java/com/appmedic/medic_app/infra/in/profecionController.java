@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/profecion")
+@RequestMapping("${spring.mediapp.config.url}/profecion")
 public class profecionController {
     private static final Loggers log = new Loggers();
     private final profecionService service;

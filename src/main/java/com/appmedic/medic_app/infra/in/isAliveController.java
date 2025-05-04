@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/isAlive")
+@RequestMapping("${spring.mediapp.config.url}/isAlive")
 public class isAliveController {
 
     private static final Loggers logger = new Loggers();

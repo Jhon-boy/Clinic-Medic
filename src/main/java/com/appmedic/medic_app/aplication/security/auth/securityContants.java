@@ -1,7 +1,6 @@
 package com.appmedic.medic_app.aplication.security.auth;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,4 +13,7 @@ import org.springframework.stereotype.Component;
 public class securityContants {
 
     public static Long JWT_EXPIRATION = 360000L;
+    public static String HEADER_NAME = "Authorization";
+    public static String TYPE_APLICATION = "application/json";
+    public static String TYPE_ENCODING = "UTF-8";
 }

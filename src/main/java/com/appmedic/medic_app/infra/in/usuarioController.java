@@ -7,7 +7,6 @@ import com.appmedic.medic_app.domain.entity.seguridad.persistence.tUsuarioReposi
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/usuario")
+@RequestMapping("${spring.mediapp.config.url}/usuario")
 public class usuarioController {
 
     private static final Loggers log = new Loggers();
-    private final tUsuarioRepository repository;
     private final loginService service;
 
 
     public  usuarioController(tUsuarioRepository _repository, loginService _service) {
-        this.repository = _repository;
         this.service = _service;
         log.setLogger(usuarioController.class);
     }

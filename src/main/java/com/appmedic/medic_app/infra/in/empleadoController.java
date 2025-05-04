@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * */
 @RestController
-@RequestMapping("${spring.mediapp.url_endpoint}/empleado")
+@RequestMapping("${spring.mediapp.config.url}/empleado")
 public class empleadoController {
 
     private static final Loggers log = new Loggers();
