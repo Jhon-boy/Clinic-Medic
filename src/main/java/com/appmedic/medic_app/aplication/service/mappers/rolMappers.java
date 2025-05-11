@@ -1,6 +1,5 @@
 package com.appmedic.medic_app.aplication.service.mappers;
 
-import com.appmedic.medic_app.aplication.ports.in.dto.actualizarRolDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarRolDTO;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGROL;
 import com.appmedic.medic_app.util.Utils;
@@ -18,13 +17,4 @@ public class rolMappers {
         rol.setActivo(dto.activo());
         return rol;
     }
-    public static TSEGROL toDTOtoEntityUpdate(actualizarRolDTO dto ){
-        TSEGROL rol = new TSEGROL();
-        rol.setId(dto.idRol());
-        rol.setNombre(Utils.safeString(dto.nombre()));
-        rol.setDescripcion(Utils.safeString(dto.descripcion()));
-        rol.setActivo(dto.activo());
-        return rol;
-    }
-
 }
