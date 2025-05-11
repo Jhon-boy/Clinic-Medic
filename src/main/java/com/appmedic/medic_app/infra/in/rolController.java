@@ -1,5 +1,6 @@
 package com.appmedic.medic_app.infra.in;
 
+import com.appmedic.medic_app.aplication.ports.in.dto.actualizarRolDTO;
 import com.appmedic.medic_app.aplication.ports.in.dto.registrarRolDTO;
 import com.appmedic.medic_app.aplication.service.rolService;
 import com.appmedic.medic_app.config.logger.Loggers;
@@ -7,10 +8,7 @@ import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 /**
  * Controlador de la entidad TSEROL
@@ -42,4 +40,26 @@ public class rolController {
         return service.registrarRol(dto);
     }
 
+    /**
+     * ENDPOINT se encarga de actualizar un  rol
+     * @param dto Objeto de transferencia de datos
+     * @return Un objeto de respuesta que indica el resultado del proceso de registro.
+     */
+    @PostMapping("/actualizar")
+    public Response actualizarRol(@RequestBody @Valid actualizarRolDTO dto, BindingResult bindingResult, HttpServletRequest request){
+        log.info(Utils.getClientIP(request));
+        if (bindingResult.hasErrors()) {
+            return Utils.getAllErros(bindingResult, rolController.class);
+        }
+        return service.updateRol(dto);
+    }
+    /**
+     * ENDPOINT se encarga de listar los roles
+     * @return Un objeto de respuesta que indica el resultado del proceso de registro.
+     */
+    @GetMapping
+    public Response listarRoles(HttpServletRequest request){
+        log.info(Utils.getClientIP(request));
+        return  service.listRols();
+    }
 }
