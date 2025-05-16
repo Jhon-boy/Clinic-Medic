@@ -1,4 +1,4 @@
-package com.appmedic.medic_app.util;
+package com.appmedic.medic_app.domain.enums;
 
 import lombok.Getter;
 

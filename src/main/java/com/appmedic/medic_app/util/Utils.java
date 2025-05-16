@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -115,5 +116,16 @@ public class Utils {
         String formatedDate = fechaNow.format(formatter);
         LocalDateTime parsedTime = LocalDateTime.parse(formatedDate, formatter);
         return Date.from(parsedTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+    /**
+     * Parsea la Fecha cuando se recibe en formato String
+     * */
+    public  static  Date getDateNow(String fecha){
+        SimpleDateFormat fechaFormato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        try {
+            return  fechaFormato.parse(fecha);
+        }catch (Exception ex){
+            throw  new IllegalArgumentException("FECHA EN FORMATO INCORRECTO");
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.appmedic.medic_app.aplication.security.auth;
 
 import com.appmedic.medic_app.config.logger.Loggers;
 import com.appmedic.medic_app.infra.out.Response;
-import com.appmedic.medic_app.util.TokenVerify;
+import com.appmedic.medic_app.domain.enums.TokenVerify;
 import com.appmedic.medic_app.util.Utils;
 import com.appmedic.medic_app.util._CONST;
 import com.fasterxml.jackson.databind.ObjectMapper;

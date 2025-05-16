@@ -2,7 +2,7 @@ package com.appmedic.medic_app.aplication.security.auth;
 
 import com.appmedic.medic_app.aplication.service.loginService;
 import com.appmedic.medic_app.infra.out.Response;
-import com.appmedic.medic_app.util.TokenVerify;
+import com.appmedic.medic_app.domain.enums.TokenVerify;
 import com.appmedic.medic_app.util.Utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
