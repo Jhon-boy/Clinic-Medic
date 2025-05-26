@@ -26,5 +26,6 @@ public class _CONST {
     // ERRORES EN SOLICITUD
     public static final String CLASS_ERROR = "\nCLASE ERROR --> ";
     public static String URL_ENDPOINT;
+    public static Integer IVA = 15;
 
 }

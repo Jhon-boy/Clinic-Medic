@@ -105,7 +105,7 @@ public class usuarioService implements usuarioServicePort {
         List<TSEGUSUARIO> users = repository.findAll();
         switch (StateFilter){
             case 1: //Active
-                users =users.stream().filter(user -> user.isActivo()).collect(Collectors.toList());
+                users =users.stream().filter(TSEGUSUARIO::isActivo).collect(Collectors.toList());
                 break;
             case 0: //In Active
                 users =users.stream().filter(user -> !user.isActivo()).collect(Collectors.toList());

@@ -60,7 +60,7 @@ public class citasController {
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
     @GetMapping("/cancelar/{id}")
-    public Response cancelar(@RequestParam Integer id, HttpServletRequest request){
+    public Response cancel(@RequestParam Integer id, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         return  service.cancelarCita(id);
     }
@@ -70,7 +70,7 @@ public class citasController {
      * @return Un objeto de respuesta que indica el resultado del proceso de registro.
      */
     @GetMapping("/listar/{tipo}")
-    public Response listar(@RequestParam Integer tipo, HttpServletRequest request){
+    public Response list(@RequestParam Integer tipo, HttpServletRequest request){
         log.info(Utils.getClientIP(request));
         return  service.cancelarCita(tipo);
     }

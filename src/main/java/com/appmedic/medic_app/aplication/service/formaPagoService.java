@@ -12,13 +12,18 @@ import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
 import com.appmedic.medic_app.util._CONST;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+/**
+ * La logica de Negocio para la entidad TFORMAPAGO
+ * @author  John C
+ * @version 1.0
+ * */
 @Service
 public class formaPagoService implements formaPago {
     private final Loggers logs = new Loggers();
@@ -35,6 +40,7 @@ public class formaPagoService implements formaPago {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Response registrarFormaPago(registrarFormaPagoDTO dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response response = Utils.generateBadResponseDefault();
@@ -54,18 +60,20 @@ public class formaPagoService implements formaPago {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Response actualizarFormaPago(actualizarFormaPago dto) {
         logs.info(_CONST.ML_INI + Utils.toJson(dto));
         Response response = Utils.generateBadResponseDefault();
 
         try {
             Optional<TPAGFORMAPAGO> pago = repository.findById(dto.idFormaPago());
-            if(!pago.isEmpty()){
+            if(pago.isEmpty()){
                 logs.info(_CONST.ML_FIN + "NO EXISTE FORMA DE PAGO PARA EL ID: " + dto.idFormaPago());
                 response.setMessage(Errores.DATA_WRONG.getMessage());
+                response.setData("NO EXISTE INFORMACION");
                 return  response;
             }
-            TPAGFORMAPAGO newPago = repository.save(formaPagoMappers.updateEntity(dto));
+            TPAGFORMAPAGO newPago = repository.save(formaPagoMappers.updateEntity(dto, pago.get()));
             response = Utils.generateOKResponse(newPago);
         }catch (Exception ex){
             logs.error(_CONST.COD_ERROR ,ex);

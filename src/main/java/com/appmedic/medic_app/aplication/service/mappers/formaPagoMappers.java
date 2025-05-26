@@ -17,9 +17,7 @@ public class formaPagoMappers {
         return  entity;
     }
 
-    public  static TPAGFORMAPAGO updateEntity(actualizarFormaPago dto){
-        TPAGFORMAPAGO entity = new TPAGFORMAPAGO();
-
+    public  static TPAGFORMAPAGO updateEntity(actualizarFormaPago dto, TPAGFORMAPAGO entity){
         entity.setNombre(Utils.safeString(dto.nombre()));
         entity.setDescripcion(Utils.safeString(dto.descripcion()));
         entity.setFactualizacion(Utils.getDateNow());
