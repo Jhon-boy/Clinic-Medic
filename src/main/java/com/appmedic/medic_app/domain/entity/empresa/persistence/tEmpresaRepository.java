@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /*
 * Interfaz que persiste a la entidad de TEMPEMPRESA
 * */
-public interface tEmpresaRepository extends JpaRepository<TEMPEMPRESA, Integer> {
+public interface tEmpresaRepository extends JpaRepository<TEMPEMPRESA, String> {
 }
