@@ -42,6 +42,7 @@ public class rolService implements rolServicePort {
             TSEGROL rolCreado = repository.save(rol);
             response = Utils.generateOKResponse(rolCreado);
         }catch (Exception e){
+            System.out.println(e.getMessage());
             logs.error(_CONST.CLASS_ERROR ,e);
         }
         logs.info(_CONST.ML_FIN + Utils.toJson(response));
