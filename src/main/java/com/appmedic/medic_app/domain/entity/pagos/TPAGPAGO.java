@@ -1,7 +1,6 @@
 package com.appmedic.medic_app.domain.entity.pagos;
 
 import com.appmedic.medic_app.domain.entity.personas.TPERPERSONA;
-import com.appmedic.medic_app.domain.entity.seguridad.TSEGUSUARIO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

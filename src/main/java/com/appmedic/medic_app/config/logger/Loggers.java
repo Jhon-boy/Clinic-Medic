@@ -23,7 +23,7 @@ public class Loggers implements  LoggerPort {
 
     @Override
     public void error(String message, Throwable error) {
-        logger.error(message, (Object) error.getMessage());
+        logger.error(message, error.getMessage());
     }
 }
 

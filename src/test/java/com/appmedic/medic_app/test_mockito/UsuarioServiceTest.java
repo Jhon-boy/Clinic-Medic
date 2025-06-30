@@ -1,11 +1,11 @@
 package com.appmedic.medic_app.test_mockito;
 
-import com.appmedic.medic_app.aplication.service.usuarioService;
+import com.appmedic.medic_app.aplication.service.UsuarioService;
 import com.appmedic.medic_app.domain.entity.seguridad.TSEGUSUARIO;
-import com.appmedic.medic_app.domain.entity.seguridad.persistence.tRolRepository;
-import com.appmedic.medic_app.domain.entity.seguridad.persistence.tUsuarioRepository;
+import com.appmedic.medic_app.domain.entity.seguridad.persistence.TrolRepository;
+import com.appmedic.medic_app.domain.entity.seguridad.persistence.TusuarioRepository;
 import com.appmedic.medic_app.infra.out.Response;
-import com.appmedic.medic_app.util._CONST;
+import com.appmedic.medic_app.util.Const;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,29 +22,25 @@ import static org.mockito.Mockito.when;
  *TEST a la CLASE service
  * JB
  * */
-public class UsuarioServiceTest {
+class UsuarioServiceTest {
     @Mock
-    private tUsuarioRepository userRepository;
+    private TusuarioRepository userRepository;
 
     @Mock
-    private tRolRepository rolRepository;
+    private TrolRepository rolRepository;
 
     @InjectMocks
-    private usuarioService service;
+    private UsuarioService service;
 
     @Test
-    public void testGetUser() throws Exception {
+    void testGetUser() {
         TSEGUSUARIO usuarioMock = new TSEGUSUARIO();
         when(userRepository.findByUsuario("userTest")).thenReturn(Optional.of(usuarioMock));
 
         Response response = service.obtenerUsuarioByUser("userTest");
         assertEquals("Usuario Existe", response.getData());
-        assertEquals(_CONST.COD_OK, response.getCode());
+        assertEquals(Const.COD_OK, response.getCode());
 
     }
 
-    @Test
-    void testLogin(){
-
-    }
 }

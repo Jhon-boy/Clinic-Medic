@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,16 +24,16 @@ public class CacheConfigDB {
     public static final String CACHE_PAYS = "payments";
     public static final String CACHE_EMPLOYES = "employes";
 
-    private final String URL_ADDRESS;
+    private final String urlAddress;
     public  CacheConfigDB(AplicationProperties aplicationProperties){
-        this.URL_ADDRESS = aplicationProperties.getRedis().getUrl();
+        this.urlAddress = aplicationProperties.getRedis().getUrl();
     }
 
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisClient(){
         var config = new Config();
         config.useSingleServer()
-                .setAddress(URL_ADDRESS);
+                .setAddress(urlAddress);
 
         return Redisson.create(config);
     }
@@ -42,8 +41,8 @@ public class CacheConfigDB {
     @Bean
     @Autowired
     public CacheManager cacheManager( RedissonClient redisClient){
-        List<String> CACHES = List.of(CACHE_PAYS, CACHE_EMPLOYES, CACHE_NAME);
-        Map<String, CacheConfig> config = CACHES.stream().collect(Collectors.toMap(name -> name, name -> new CacheConfig()));
+        List<String> caches = List.of(CACHE_PAYS, CACHE_EMPLOYES, CACHE_NAME);
+        Map<String, CacheConfig> config = caches.stream().collect(Collectors.toMap(name -> name, name -> new CacheConfig()));
         return new  RedissonSpringCacheManager(redisClient, config);
     }
 }

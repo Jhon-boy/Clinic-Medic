@@ -1,9 +1,8 @@
 package com.appmedic.medic_app.test_junit;
 
-import ch.qos.logback.core.testUtil.DummyEncoder;
 import com.appmedic.medic_app.infra.out.Response;
 import com.appmedic.medic_app.util.Utils;
-import com.appmedic.medic_app.util._CONST;
+import com.appmedic.medic_app.util.Const;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -21,15 +19,15 @@ import static org.mockito.Mockito.when;
 /**
  * Clase que TEST de la clase UTILS
  * */
-public class UtilTest {
+ class UtilTest {
 
 
     @Test
      void generateOkResponseTest(){
 
         Response response =  Utils.generateOKResponse(new Object());
-        Assert.assertEquals(_CONST.COD_OK, response.getCode());
-        Assert.assertEquals(_CONST.MENSAJE_OK, response.getMessage());
+        Assert.assertEquals(Const.COD_OK, response.getCode());
+        Assert.assertEquals(Const.MENSAJE_OK, response.getMessage());
         Assert.assertEquals(Object.class, response.getData().getClass());
 
     }
@@ -37,7 +35,7 @@ public class UtilTest {
     @Test
     void generateBadResponseTest() {
         Response response = Utils.generateBadResponseDefault();
-        Assertions.assertEquals(_CONST.COD_ERROR, response.getCode());
+        Assertions.assertEquals(Const.COD_ERROR, response.getCode());
     }
 
     @Test
@@ -68,22 +66,11 @@ public class UtilTest {
 
         Response response = Utils.getAllErros(bindingResult, DummyClass.class);
 
-        Assertions.assertEquals(_CONST.COD_ERROR, response.getCode());
+        Assertions.assertEquals(Const.COD_ERROR, response.getCode());
         Assertions.assertEquals("Verifique que los campos esten completos", response.getMessage());
 
         List<String> expectErrors = Arrays.asList("Key 1 is required", "Key 2 is required");
         Assertions.assertEquals(expectErrors, response.getData());
-
-    }
-
-    @Test
-    void getDateNowTest(){
-//        long before = System.currentTimeMillis();
-//        Date result = Utils.getDateNow();
-//        long after = System.currentTimeMillis();
-//
-//        Assertions.assertTrue(result.getTime() >= before && result.getTime() <= after,
-//                "Returned date is not within expected time range");
 
     }
 

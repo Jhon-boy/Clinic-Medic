@@ -15,7 +15,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Clase que alimenta de funcionalidades a toda la aplicacion
@@ -27,7 +26,7 @@ public class Utils {
 
     private static final Loggers log = new Loggers();
 
-    public Utils(){
+    Utils(){
         log.setLogger(Utils.class);
     }
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -49,7 +48,7 @@ public class Utils {
      * @Return Response
      * */
     public static Response generateOKResponse(Object obj){
-        return new Response(_CONST.COD_OK, _CONST.MENSAJE_OK, obj);
+        return new Response(Const.COD_OK, Const.MENSAJE_OK, obj);
     }
 
 
@@ -59,7 +58,7 @@ public class Utils {
      * @Return Response
      * */
     public static Response generateBadResponseDefault(){
-        return new Response(_CONST.COD_ERROR, _CONST.MENSAJE_ERROR, null);
+        return new Response(Const.COD_ERROR, Const.MENSAJE_ERROR, null);
     }
 
     /**
@@ -80,7 +79,7 @@ public class Utils {
         try {
             return objectMapper.writeValueAsString(obj);
         } catch (Exception e) {
-            System.out.println("Error al convertir objeto a JSON" + e);
+            log.info("Error al convertir objeto a JSON" + e);
             return "Error al convertir a JSON: " + e.getMessage();
         }
     }
@@ -89,9 +88,9 @@ public class Utils {
      * controladores
      * */
     public static <T> Response getAllErros(BindingResult bindingResult, Class<T> clazz){
-        List<String> errors = bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-        log.info(_CONST.CLASS_ERROR + clazz.getSimpleName() +  _CONST.ML_ERROR + toJson(errors));
-        return Utils.generateResponse(_CONST.COD_ERROR, "Verifique que los campos esten completos", errors);
+        List<String> errors = bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).toList();
+        log.info(Const.CLASS_ERROR + clazz.getSimpleName() +  Const.ML_ERROR + toJson(errors));
+        return Utils.generateResponse(Const.COD_ERROR, "Verifique que los campos esten completos", errors);
     }
 
     /**

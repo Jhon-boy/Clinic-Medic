@@ -8,6 +8,7 @@ class MedicApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Esto verifica que el contexto de Spring se cargue correctamente.
 	}
 
 }

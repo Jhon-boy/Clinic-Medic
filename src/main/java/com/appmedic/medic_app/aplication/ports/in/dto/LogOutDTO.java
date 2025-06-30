@@ -1,0 +1,16 @@
+package com.appmedic.medic_app.aplication.ports.in.dto;
+
+import jakarta.validation.constraints.NotBlank;
+/*
+ * Modelo para recibir datos
+ * */
+public record LogOutDTO(
+        @NotBlank(message = "Campo USER no puede ser vacio / nulo")
+        String user,
+        @NotBlank(message = "Campo PASSWORD no puede ser vacio / nulo")
+        String token,
+        String terminalDevice,
+        String redName,
+        String canal
+) {
+}
