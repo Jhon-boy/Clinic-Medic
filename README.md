@@ -16,7 +16,7 @@ Proyecto desarrollado con **Java Spring Boot** como práctica integral para impl
 
 - ✅ **Arquitectura limpia** aplicada.
 - ✅ **Integración con SonarQube** para análisis estático de código.
-![Reporte SonarQube](src/resources/img/sonarqube.png)
+![Reporte SonarQube](src/main/resources/img/sonarqube.png)
 - ✅ **Servidor Redis** para mejora de performance vía cache.
 - ✅ **Uso de patrones de diseño**, incluyendo el patrón *Builder*.
 - ✅ **Rollback transaccional** para garantizar integridad de datos.
