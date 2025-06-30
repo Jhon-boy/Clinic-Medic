@@ -1,0 +1,16 @@
+FROM redis:7.2-alpine
+
+# Exponer el puerto estándar de Redis
+EXPOSE 6379
+
+# Copiar archivo de configuración personalizado (opcional)
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Crear directorio para datos persistentes
+RUN mkdir -p /data
+
+# Configuración de volumen para persistencia de datos
+VOLUME /data
+
+# Ejecutar Redis con la configuración personalizada
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]

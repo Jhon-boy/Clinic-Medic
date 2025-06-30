@@ -1,0 +1,21 @@
+
+# Utiliza la imagen oficial de MySQL 5.7
+FROM mysql:5.7
+
+# Variables de entorno para configuración automática
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=my_database
+ENV MYSQL_USER=user
+ENV MYSQL_PASSWORD=user_password
+
+# Puerto que expone el contenedor
+EXPOSE 3306
+
+# Volumen para persistencia de datos
+VOLUME /var/lib/mysql
+
+# Opcional: Copiar archivos SQL de inicialización
+# COPY init.sql /docker-entrypoint-initdb.d/
+
+# Comando por defecto (ya viene configurado en la imagen oficial)
+# CMD ["mysqld"]
